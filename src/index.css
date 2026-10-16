@@ -1,0 +1,640 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+:root {
+  --background: 43 37% 91%; --foreground: 147 17% 18%; --border: 40 15% 76%;
+  --card: 42 32% 96%; --card-foreground: 147 17% 18%; --card-border: 40 15% 76%;
+  --popover: 42 32% 96%; --popover-foreground: 147 17% 18%; --popover-border: 40 15% 76%;
+  --primary: 152 36% 34%; --primary-foreground: 43 37% 91%; --secondary: 39 23% 84%;
+  --secondary-foreground: 147 17% 18%; --muted: 42 24% 86%; --muted-foreground: 145 9% 42%;
+  --accent: 17 70% 55%; --accent-foreground: 43 37% 96%; --destructive: 3 61% 48%;
+  --destructive-foreground: 43 37% 96%; --input: 40 15% 76%; --ring: 152 36% 34%;
+  --sidebar: 43 37% 91%; --sidebar-foreground: 147 17% 18%; --sidebar-border: 40 15% 76%;
+  --sidebar-primary: 152 36% 34%; --sidebar-primary-foreground: 43 37% 91%; --sidebar-accent: 42 25% 85%;
+  --sidebar-accent-foreground: 147 17% 18%; --sidebar-ring: 152 36% 34%;
+  --chart-1: 152 36% 34%; --chart-2: 17 70% 55%; --chart-3: 44 64% 59%; --chart-4: 195 28% 54%; --chart-5: 350 40% 60%;
+  --app-font-sans: 'Space Grotesk', sans-serif; --app-font-serif: Georgia, serif; --app-font-mono: 'DM Mono', monospace;
+  --radius: .25rem; --button-outline: rgba(35,39,32,.14); --badge-outline: rgba(35,39,32,.08);
+  --opaque-button-border-intensity: -8; --elevate-1: rgba(35,39,32,.035); --elevate-2: rgba(35,39,32,.08);
+  --shadow-2xs: 1px 2px 0 rgba(30,37,29,.1); --shadow-xs: 2px 3px 0 rgba(30,37,29,.12);
+  --shadow-sm: 3px 4px 0 rgba(30,37,29,.15); --shadow: 4px 6px 0 rgba(30,37,29,.16);
+  --shadow-md: 6px 8px 0 rgba(30,37,29,.16); --shadow-lg: 8px 10px 0 rgba(30,37,29,.16);
+  --shadow-xl: 10px 14px 0 rgba(30,37,29,.16); --shadow-2xl: 12px 18px 0 rgba(30,37,29,.2);
+}
+.dark {
+  --background: 147 17% 18%; --foreground: 43 37% 91%; --border: 145 9% 36%;
+  --card: 147 17% 22%; --card-foreground: 43 37% 91%; --card-border: 145 9% 36%;
+  --popover: 147 17% 22%; --popover-foreground: 43 37% 91%; --popover-border: 145 9% 36%;
+  --primary: 152 36% 48%; --primary-foreground: 147 17% 18%; --secondary: 147 12% 28%; --secondary-foreground: 43 37% 91%;
+  --muted: 147 12% 28%; --muted-foreground: 43 15% 69%; --accent: 17 70% 59%; --accent-foreground: 147 17% 18%;
+  --destructive: 3 61% 55%; --destructive-foreground: 43 37% 96%; --input: 145 9% 36%; --ring: 152 36% 48%;
+  --sidebar: 147 17% 18%; --sidebar-foreground: 43 37% 91%; --sidebar-border: 145 9% 36%;
+  --sidebar-primary: 152 36% 48%; --sidebar-primary-foreground: 147 17% 18%; --sidebar-accent: 147 12% 28%;
+  --sidebar-accent-foreground: 43 37% 91%; --sidebar-ring: 152 36% 48%;
+  --chart-1: 152 36% 48%; --chart-2: 17 70% 59%; --chart-3: 44 64% 65%; --chart-4: 195 28% 62%; --chart-5: 350 40% 68%;
+  --shadow-2xs: 1px 2px 0 rgba(0,0,0,.15); --shadow-xs: 2px 3px 0 rgba(0,0,0,.18);
+  --shadow-sm: 3px 4px 0 rgba(0,0,0,.22); --shadow: 4px 6px 0 rgba(0,0,0,.25);
+  --shadow-md: 6px 8px 0 rgba(0,0,0,.27); --shadow-lg: 8px 10px 0 rgba(0,0,0,.3);
+  --shadow-xl: 10px 14px 0 rgba(0,0,0,.32); --shadow-2xl: 12px 18px 0 rgba(0,0,0,.35);
+}
+@theme inline {
+  --color-background: hsl(var(--background)); --color-foreground: hsl(var(--foreground)); --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input)); --color-ring: hsl(var(--ring)); --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground)); --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground)); --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground)); --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground)); --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground)); --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground)); --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground)); --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono); --font-serif: var(--app-font-serif);
+}
+@layer base {
+  * { @apply border-border; box-sizing: border-box; }
+  body { @apply font-sans antialiased bg-background text-foreground; margin: 0; }
+}
+:root { font-family: var(--app-font-sans); font-synthesis: none; text-rendering: optimizeLegibility; }
+button { font: inherit; }
+.desktop { min-height:100dvh;position:relative;overflow:hidden;color:#202d26;background-color:#477c70;background-image:radial-gradient(ellipse at 78% 12%,rgba(205,188,131,.34),transparent 30%),radial-gradient(ellipse at 20% 82%,rgba(29,83,74,.55),transparent 38%),linear-gradient(135deg,#639184 0%,#477c70 46%,#396f67 100%) }
+.desktop::before { content:"";position:absolute;inset:0;pointer-events:none;opacity:.11;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E") }
+.desktop::after { content:"MM";position:absolute;right:6vw;top:19%;color:rgba(230,217,176,.13);font:700 clamp(140px,29vw,430px)/.8 var(--app-font-sans);letter-spacing:-.13em;pointer-events:none }
+.desktop-content { position:relative;z-index:1;min-height:calc(100dvh - 52px);padding:28px 30px 78px }
+.desktop-intro { position:absolute;right:clamp(20px,8vw,120px);top:52px;width:min(345px,36vw);color:#e9e4cd }
+.desktop-intro .eyebrow { font:11px var(--app-font-mono);text-transform:uppercase;letter-spacing:.16em;opacity:.78 }
+.desktop-intro h1 { font-size:clamp(34px,4vw,58px);line-height:.98;letter-spacing:-.06em;margin:16px 0 14px;font-weight:600 }
+.desktop-intro p { max-width:300px;font-size:14px;line-height:1.55;color:#d7ddc8 }
+.desktop-icon-list { display:flex;flex-direction:column;gap:12px;width:154px;position:relative;z-index:2 }
+.desktop-icon { width:148px;min-height:92px;color:#f0eedb;padding:8px 7px 6px;border:1px solid transparent;background:transparent;cursor:pointer;display:flex;align-items:center;flex-direction:column;gap:5px;text-shadow:1px 1px 2px rgba(19,40,35,.75);transition:background .18s ease,transform .18s ease,border-color .18s ease }
+.desktop-icon:hover,.desktop-icon:focus-visible { background:rgba(226,225,197,.18);border-color:rgba(240,238,219,.52);outline:none;transform:translateY(-2px) }
+.desktop-icon .icon-name { font:12px var(--app-font-mono);text-align:center;line-height:1.35;max-width:138px }
+.file-glyph { width:34px;height:40px;position:relative;background:#eee6c8;border:1px solid #45534c;box-shadow:2px 3px 0 rgba(24,45,40,.3);border-radius:1px }
+.file-glyph::before { content:"";position:absolute;right:-1px;top:-1px;border-top:11px solid #b4a985;border-left:11px solid transparent }
+.file-glyph::after { content:"";position:absolute;left:6px;right:6px;top:18px;height:2px;background:#78907d;box-shadow:0 5px #78907d,0 10px #78907d }
+.file-glyph.coral { background:#e7a27f }.file-glyph.yellow { background:#e6ce78 }.file-glyph.blue { background:#a8c5b5 }
+.terminal-shortcut { margin-top:14px }
+.terminal-glyph { width:40px;height:32px;border:2px solid #e7e5d2;background:#233d35;box-shadow:2px 3px 0 rgba(24,45,40,.3);color:#e6ce78;font:15px var(--app-font-mono);display:grid;place-items:center }
+.window { position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);width:min(650px,calc(100vw - 38px));max-height:min(590px,calc(100dvh - 115px));display:flex;flex-direction:column;background:#d5d3c4;color:#242e29;border:1px solid #f5f2df;box-shadow:2px 2px 0 #252f2b,8px 9px 0 rgba(20,41,36,.32);animation:window-in .2s ease-out both }
+.window.terminal-window { width:min(720px,calc(100vw - 38px)) }
+.window-titlebar { height:31px;min-height:31px;display:flex;align-items:center;justify-content:space-between;padding:3px 4px 3px 9px;background:#315f54;color:#f5efd9;font:12px var(--app-font-mono);letter-spacing:.015em }
+.window-title { display:flex;align-items:center;gap:8px;min-width:0 }.window-title-mark { color:#e9ca78 }.window-controls { display:flex;gap:3px }
+.window-control { width:23px;height:22px;border:1px solid #f4f0dc;border-right-color:#39453e;border-bottom-color:#39453e;background:#d7d5c7;color:#25332c;line-height:1;display:grid;place-items:center;cursor:pointer;font-family:var(--app-font-mono) }
+.window-control:hover { background:#f0d47e }
+.window-body { padding:22px clamp(17px,4vw,31px) 20px;overflow-y:auto }
+.file-body { background:#eeecde;margin:8px;border:1px solid #a8a798;box-shadow:inset 1px 1px #fffef1 }.file-body .window-body { padding:23px 26px 25px }
+.document-kicker { font:10px var(--app-font-mono);color:#68786d;letter-spacing:.15em;text-transform:uppercase;margin:0 0 11px }
+.document-title { font-size:clamp(27px,4vw,39px);letter-spacing:-.055em;line-height:1;margin:0 0 21px;font-weight:600 }
+.editable-copy { font:14px/1.7 var(--app-font-mono);color:#39483e;white-space:pre-wrap }.editable-copy p { margin:0 0 13px }
+.editable-note { display:inline-flex;align-items:center;gap:6px;background:#f3df9e;color:#5c4d24;font:10px var(--app-font-mono);padding:5px 8px;margin-top:14px }
+.window-status { border-top:1px solid #b5b4a7;margin-top:18px;padding-top:9px;display:flex;justify-content:space-between;font:10px var(--app-font-mono);color:#778077 }
+.terminal-body { background:#202c27;color:#e8e5d1;margin:8px;border:1px solid #29332e;min-height:255px;display:flex;flex-direction:column }
+.terminal-scroll { flex:1;overflow-y:auto;font:12px/1.7 var(--app-font-mono);padding:17px 19px 6px;min-height:195px;white-space:pre-wrap }
+.terminal-line { margin:0;color:#d7dac4 }.terminal-line.system { color:#99b7a3 }.terminal-line.error { color:#e8a47d }.terminal-line.promptline { color:#e7d184 }
+.terminal-form { display:flex;align-items:center;gap:9px;padding:9px 19px 15px;font:12px var(--app-font-mono) }.terminal-prompt { color:#e4ce78;flex:none }
+.terminal-input { flex:1;min-width:0;outline:0;border:0;border-bottom:1px solid #758479;background:transparent;color:#f5efd9;padding:5px 2px;font:inherit }.terminal-input:focus { border-color:#e4ce78 }
+.window-menu { height:31px;border-bottom:1px solid #aaa99d;padding:6px 12px;display:flex;gap:22px;font:11px var(--app-font-mono);color:#4d584f }
+.taskbar { position:fixed;z-index:20;bottom:0;inset-inline:0;height:52px;padding:6px 8px;display:flex;align-items:center;gap:7px;background:#d5d3c4;border-top:1px solid #f8f6e5;box-shadow:0 -2px 5px rgba(17,42,35,.14) }
+.start-button,.task-button { height:37px;border:1px solid #fffdf1;border-right-color:#59645a;border-bottom-color:#59645a;background:#d8d6c9;color:#27332c;box-shadow:1px 1px #69736a;cursor:pointer }
+.start-button { display:flex;align-items:center;gap:7px;padding:0 12px;font-weight:700;font-size:13px;letter-spacing:-.04em }
+.start-mark { width:18px;height:18px;display:grid;place-items:center;background:#315f54;color:#e5d17e;font:12px var(--app-font-mono) }
+.task-divider { height:30px;border-left:1px solid #a7a698;border-right:1px solid #f5f2e0;margin:0 2px }
+.task-button { min-width:164px;max-width:230px;display:flex;align-items:center;gap:8px;padding:0 9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:11px var(--app-font-mono) }
+.task-button.minimized { border-color:#74786d #fffdf1 #fffdf1 #74786d;box-shadow:inset 1px 1px #879084;background:#c5c3b7 }
+.task-clock { margin-left:auto;min-width:78px;height:35px;display:grid;place-items:center;border:1px solid #aaa99d;box-shadow:inset 1px 1px #f5f2e0;font:11px var(--app-font-mono);color:#46534a }
+.start-menu { position:fixed;z-index:19;bottom:51px;left:8px;width:245px;padding:7px;background:#d5d3c4;border:1px solid #f8f6e5;border-right-color:#59645a;border-bottom-color:#59645a;box-shadow:4px 5px 0 rgba(20,41,36,.23);animation:menu-in .15s ease-out both }
+.start-menu-head { background:#315f54;color:#e9e4cd;padding:12px 13px;margin-bottom:6px;font:11px var(--app-font-mono) }.start-menu-head strong { display:block;font:600 17px var(--app-font-sans);margin-top:4px }
+.menu-action { border:0;width:100%;background:transparent;color:#2a352d;padding:10px 9px;text-align:left;display:flex;gap:11px;align-items:center;cursor:pointer;font:12px var(--app-font-mono) }
+.menu-action:hover,.menu-action:focus-visible { background:#315f54;color:#f5efd9;outline:none }.menu-rule { border-top:1px solid #b1b1a2;margin:5px 1px }
+.desktop-note { position:absolute;right:29px;bottom:24px;z-index:1;color:rgba(236,234,212,.78);font:10px var(--app-font-mono);letter-spacing:.04em }.mobile-hint { display:none }
+@keyframes window-in { from { opacity:0;transform:translate(-50%,-48%) scale(.98) } to { opacity:1;transform:translate(-50%,-50%) scale(1) } }
+@keyframes menu-in { from { opacity:0;transform:translateY(5px) } to { opacity:1;transform:translateY(0) } }
+@media(max-width:700px) {
+  .desktop-content { padding:18px 12px 74px;min-height:calc(100dvh - 49px) }
+  .desktop::after { right:-18px;top:25%;font-size:58vw }
+  .desktop-intro { position:relative;top:auto;right:auto;width:auto;margin:3px 12px 24px 105px;min-height:118px }
+  .desktop-intro .eyebrow { font-size:9px }.desktop-intro h1 { font-size:clamp(30px,8vw,42px);margin:9px 0 }
+  .desktop-intro p { font-size:12px;line-height:1.4 }
+  .desktop-icon-list { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:auto;gap:7px }
+  .desktop-icon { width:100%;min-height:89px }.terminal-shortcut { margin-top:0 }
+  .window { top:49%;width:calc(100vw - 22px);max-height:calc(100dvh - 92px) }.window.terminal-window { width:calc(100vw - 22px) }
+  .window-titlebar { font-size:10px }.file-body { margin:6px }.file-body .window-body { padding:20px 17px }
+  .editable-copy { font-size:12px }.terminal-scroll { padding:13px 12px 5px;font-size:11px }
+  .terminal-form { padding:8px 12px 12px;font-size:11px }.window-menu { gap:14px;font-size:10px }
+  .taskbar { height:49px;padding:5px 6px;gap:5px }.start-button { height:35px;padding:0 8px;font-size:12px }
+  .task-button { min-width:40px;flex:1;padding:0 7px;font-size:10px }.task-clock { min-width:57px;height:33px;font-size:9px }
+  .desktop-note { display:none }.mobile-hint { display:block;margin:9px 4px;color:rgba(236,234,212,.75);font:9px var(--app-font-mono);text-align:center }
+}
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important;transition-duration:.01ms!important } }
+
+/* Classic Windows 95 desktop treatment */
+:root {
+  --app-font-sans: Tahoma, "MS Sans Serif", Arial, sans-serif;
+  --app-font-mono: "Courier New", "Lucida Console", monospace;
+}
+
+.desktop {
+  color: #000;
+  background: #008080;
+  background-image: none;
+}
+.desktop::before,
+.desktop::after { display: none; }
+.desktop-content { padding: 18px 14px 78px; }
+.desktop-intro {
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  right: auto;
+  left: 112px;
+  width: min(440px, calc(100vw - 126px));
+  min-height: 0;
+  margin: 0;
+  padding: 36px 14px 12px;
+  color: #000;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #404040 #404040 #fff;
+  box-shadow: 1px 1px #000;
+}
+.desktop-intro::before {
+  content: "Meet Me";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  left: 3px;
+  height: 22px;
+  padding: 4px 6px;
+  color: #fff;
+  background: #000080;
+  font: bold 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+  letter-spacing: 0;
+}
+.desktop-intro .eyebrow { display: none; }
+.desktop-intro h1 {
+  margin: 0 0 9px;
+  color: #000;
+  font: bold 18px/1.2 Tahoma, "MS Sans Serif", Arial, sans-serif;
+  letter-spacing: 0;
+}
+.desktop-intro p {
+  max-width: none;
+  margin: 0;
+  color: #111;
+  font: 13px/1.4 Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.desktop-icon-list {
+  position: absolute;
+  top: 12px;
+  left: 6px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 96px;
+}
+.desktop-icon {
+  width: 88px;
+  min-height: 66px;
+  padding: 3px 2px;
+  gap: 3px;
+  color: #fff;
+  border: 1px solid transparent;
+  text-shadow: 1px 1px #000;
+  transition: background .12s ease;
+}
+.desktop-icon:hover,
+.desktop-icon:focus-visible {
+  background: rgba(0, 0, 128, .38);
+  border: 1px dotted #fff;
+  outline: none;
+  transform: none;
+}
+.desktop-icon .icon-name {
+  max-width: 84px;
+  font: 10px/1.2 Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.file-glyph {
+  width: 30px;
+  height: 34px;
+  background: #e5e5e5;
+  border: 1px solid #404040;
+  box-shadow: 1px 1px #000;
+}
+.file-glyph::before { border-top-color: #aaa; }
+.file-glyph::after {
+  left: 5px;
+  right: 5px;
+  top: 16px;
+  height: 1px;
+  background: #555;
+  box-shadow: 0 4px #555, 0 8px #555;
+}
+.file-glyph.coral { background: #e8b79f; }
+.file-glyph.yellow { background: #eddb8a; }
+.file-glyph.blue { background: #b5d2d5; }
+.terminal-shortcut { margin-top: 2px; }
+.terminal-glyph {
+  width: 32px;
+  height: 30px;
+  color: #fff;
+  background: #000;
+  border: 2px outset #dfdfdf;
+  box-shadow: 1px 1px #000;
+}
+.window {
+  background: #c0c0c0;
+  color: #000;
+  border: 2px solid;
+  border-color: #fff #404040 #404040 #fff;
+  box-shadow: 1px 1px #000;
+}
+.window-titlebar {
+  height: 25px;
+  min-height: 25px;
+  padding: 2px 3px 2px 6px;
+  color: #fff;
+  background: #000080;
+  font: bold 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+  letter-spacing: 0;
+}
+.window-title { gap: 5px; }
+.window-title-mark { color: #fff; }
+.window-controls { gap: 2px; }
+.window-control {
+  width: 19px;
+  height: 18px;
+  color: #000;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #fff #404040 #404040 #fff;
+  font: bold 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.window-control:hover { background: #d7d7d7; }
+.file-body {
+  margin: 5px;
+  background: #000;
+  border: 1px solid #808080;
+  box-shadow: inset 1px 1px #404040;
+}
+.window-menu {
+  height: 25px;
+  padding: 5px 9px;
+  gap: 18px;
+  color: #000;
+  background: #c0c0c0;
+  border-bottom: 1px solid #808080;
+  font: 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.file-body .window-body {
+  padding: 17px 17px 14px;
+  color: #eee;
+  background: #000;
+}
+.document-kicker {
+  margin-bottom: 9px;
+  color: #80ff80;
+  font: 11px "Courier New", monospace;
+  letter-spacing: 0;
+}
+.document-title {
+  margin-bottom: 15px;
+  color: #fff;
+  font: bold clamp(21px, 3vw, 30px)/1.1 Tahoma, "MS Sans Serif", Arial, sans-serif;
+  letter-spacing: 0;
+}
+.editable-copy {
+  color: #e5e5e5;
+  font: 13px/1.6 "Courier New", "Lucida Console", monospace;
+}
+.editable-note {
+  margin-top: 9px;
+  padding: 4px 6px;
+  color: #aaffaa;
+  background: #000;
+  border: 1px solid #777;
+  font: 10px "Courier New", monospace;
+}
+.window-status {
+  margin: 15px -17px -14px;
+  padding: 4px 7px;
+  color: #000;
+  background: #c0c0c0;
+  border-top: 2px groove #fff;
+  font: 10px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.terminal-body {
+  margin: 5px;
+  min-height: 255px;
+  color: #eee;
+  background: #000;
+  border: 2px inset #808080;
+}
+.terminal-scroll {
+  padding: 14px 16px 6px;
+  color: #eee;
+  background: #000;
+  font: 13px/1.65 "Courier New", "Lucida Console", monospace;
+}
+.terminal-line,
+.terminal-line.system { color: #ddd; }
+.terminal-line.error { color: #ff8080; }
+.terminal-line.promptline { color: #fff; }
+.terminal-form {
+  padding: 8px 16px 14px;
+  color: #fff;
+  font: 13px "Courier New", "Lucida Console", monospace;
+}
+.terminal-prompt { color: #fff; }
+.terminal-input {
+  color: #fff;
+  border-bottom: 1px solid #aaa;
+}
+.terminal-input:focus { border-color: #fff; }
+.taskbar {
+  height: 42px;
+  padding: 4px 6px;
+  gap: 5px;
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  box-shadow: none;
+}
+.start-button,
+.task-button {
+  height: 33px;
+  color: #000;
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  box-shadow: none;
+}
+.start-button {
+  padding: 0 8px;
+  font: bold 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+  letter-spacing: 0;
+}
+.start-mark {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  background: #000080;
+  font: bold 11px Tahoma, Arial, sans-serif;
+}
+.task-divider {
+  height: 29px;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #fff;
+}
+.task-button {
+  min-width: 130px;
+  font: 11px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.task-button.minimized {
+  background: #c0c0c0;
+  border: 2px inset #dfdfdf;
+  box-shadow: none;
+}
+.task-clock {
+  min-width: 72px;
+  height: 29px;
+  color: #000;
+  border: 2px inset #dfdfdf;
+  box-shadow: none;
+  font: 11px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.start-menu {
+  bottom: 41px;
+  left: 6px;
+  padding: 4px;
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  box-shadow: 2px 2px #000;
+}
+.start-menu-head {
+  color: #fff;
+  background: #000080;
+  font: 11px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.start-menu-head strong {
+  font: bold 15px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.menu-action {
+  color: #000;
+  font: 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+.menu-action:hover,
+.menu-action:focus-visible {
+  color: #fff;
+  background: #000080;
+}
+.desktop-note {
+  right: 14px;
+  bottom: 17px;
+  color: #fff;
+  font: 10px "Courier New", monospace;
+  text-shadow: 1px 1px #000;
+}
+
+@media (max-width: 700px) {
+  .desktop-content { padding: 10px 5px 60px; }
+  .desktop-intro {
+    top: 10px;
+    left: 98px;
+    width: calc(100vw - 107px);
+    margin: 0;
+    padding: 34px 9px 10px;
+  }
+  .desktop-intro h1 { margin-bottom: 7px; font-size: 15px; }
+  .desktop-intro p { font-size: 11px; }
+  .desktop-icon-list {
+    top: 7px;
+    left: 2px;
+    display: flex;
+    width: 91px;
+    gap: 1px;
+  }
+  .desktop-icon { width: 84px; min-height: 65px; }
+  .desktop-icon .icon-name { max-width: 80px; font-size: 9px; }
+  .terminal-shortcut { margin-top: 2px; }
+  .window { top: 49%; max-height: calc(100dvh - 82px); }
+  .window-titlebar { font-size: 11px; }
+  .file-body .window-body { padding: 15px 12px 12px; }
+  .editable-copy { font-size: 11px; }
+  .window-status { margin: 13px -12px -12px; }
+  .terminal-scroll { padding: 12px 11px 5px; font-size: 11px; }
+  .terminal-form { padding: 7px 11px 11px; font-size: 11px; }
+  .taskbar { height: 39px; padding: 3px 4px; }
+  .start-button { height: 31px; }
+  .task-button { min-width: 38px; height: 30px; font-size: 9px; }
+  .task-clock { min-width: 58px; height: 27px; font-size: 9px; }
+  .start-menu { bottom: 38px; left: 4px; }
+  .desktop-note { display: none; }
+  .mobile-hint { color: #fff; text-shadow: 1px 1px #000; }
+}
+
+/* ===== Added: Meet Me is now a real window (closable + draggable) ===== */
+.desktop-intro { padding: 0; }
+.desktop-intro::before { display: none; }
+.desktop-intro .window-titlebar {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.desktop-intro .window-titlebar:active { cursor: grabbing; }
+.meetme-body { padding: 12px 14px 14px; }
+.meetme-body h1 { margin: 0 0 9px; }
+.meetme-body p { margin: 0; }
+
+/* ===== Added: a distinct picture for each desktop file ===== */
+.icon-tile {
+  width: 32px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: #000080;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #404040 #404040 #fff;
+  box-shadow: 1px 1px #000;
+}
+.icon-tile.coral { background: #e8b79f; }
+.icon-tile.yellow { background: #eddb8a; }
+.icon-tile.blue { background: #b5d2d5; }
+.icon-tile.green { background: #a9d6a9; }
+
+/* ===== Added: portfolio link button inside file windows ===== */
+.file-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  color: #000;
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  font: bold 12px Tahoma, "MS Sans Serif", Arial, sans-serif;
+  text-decoration: none;
+}
+.file-link:hover { background: #d7d7d7; }
+.file-link:active { border-style: inset; }
+.win-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  user-select: none;
+}
+.win-logo-flag { width: clamp(90px, 14vw, 150px); height: auto; }
+.win-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #000;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1;
+}
+.win-logo-ms { font-size: clamp(16px, 2.2vw, 24px); font-weight: 700; letter-spacing: -.02em; }
+.win-logo-win { font-size: clamp(14px, 2vw, 22px); font-weight: 700; margin-top: 4px; }
+.win-logo-win b { font-size: 1.5em; letter-spacing: -.03em; }
+.win-logo sup { font-size: .45em; font-weight: 400; vertical-align: top; }
+
+@media (max-width: 700px) {
+  .win-logo { left: 58%; top: 62%; transform: translate(-50%, -50%) scale(.8); }
+}
+
+/* ===== Added: Clippy (real image) ===== */
+.clippy {
+  position: fixed;
+  z-index: 15;
+  right: 14px;
+  bottom: 46px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.clippy-figure {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: 50% 100%;
+  animation: clippy-idle 5s ease-in-out infinite;
+}
+.clippy-figure img {
+  display: block;
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, .25));
+  pointer-events: none;
+}
+.clippy-figure:hover,
+.clippy-figure.wiggle { animation: clippy-wiggle .5s ease-in-out; }
+
+.clippy-bubble {
+  position: relative;
+  width: min(250px, calc(100vw - 32px));
+  margin: 0 30px 12px 0;
+  padding: 10px 12px 8px;
+  color: #000;
+  background: #ffffe1;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, .45);
+  font: 12px/1.4 Tahoma, "MS Sans Serif", Arial, sans-serif;
+  animation: menu-in .18s ease-out both;
+}
+.clippy-bubble::after {
+  content: "";
+  position: absolute;
+  right: 36px;
+  bottom: -8px;
+  width: 12px;
+  height: 12px;
+  background: #ffffe1;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: rotate(45deg);
+}
+.clippy-bubble p { margin: 0 14px 8px 0; }
+.clippy-bubble-close {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  border: 0;
+  background: transparent;
+  font: bold 14px Tahoma, Arial, sans-serif;
+  cursor: pointer;
+  line-height: 1;
+}
+.clippy-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.clippy-actions button {
+  padding: 2px 8px;
+  color: #000;
+  background: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  font: 11px Tahoma, "MS Sans Serif", Arial, sans-serif;
+  cursor: pointer;
+}
+.clippy-actions button:active { border-style: inset; }
+
+@keyframes clippy-idle {
+  0%, 85%, 100% { transform: rotate(0) }
+  90% { transform: rotate(-3deg) }
+  95% { transform: rotate(3deg) }
+}
+@keyframes clippy-wiggle {
+  0% { transform: rotate(0) scale(1) }
+  25% { transform: rotate(-7deg) scale(1.05) }
+  50% { transform: rotate(6deg) scale(1.05) }
+  75% { transform: rotate(-3deg) }
+  100% { transform: rotate(0) scale(1) }
+}
+
+@media (max-width: 700px) {
+  .clippy { right: 4px; bottom: 42px; }
+  .clippy-figure img { width: 88px; }
+  .clippy-bubble { margin-right: 14px; }
+  .clippy-bubble::after { right: 24px; }
+}
+
